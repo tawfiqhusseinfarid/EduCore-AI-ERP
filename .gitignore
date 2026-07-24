@@ -1,0 +1,33 @@
+# Node
+node_modules/
+pnpm-lock.yaml
+
+# Build
+dist/
+coverage/
+
+# Logs
+logs
+*.log
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Nest
+**/dist
+**/node_modules
+
+# Prisma
+**/generated
+
+# Docker
+docker-data/
