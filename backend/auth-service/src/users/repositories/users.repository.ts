@@ -4,7 +4,6 @@ import { Prisma, User } from '@prisma/client';
 
 @Injectable()
 export class UsersRepository {
-
   constructor(private readonly prisma: PrismaService) {}
 
   async create(data: Prisma.UserCreateInput): Promise<User> {
@@ -28,13 +27,5 @@ export class UsersRepository {
       },
     });
   }
-
-  async findAll(): Promise<User[]> {
-    return this.prisma.user.findMany({
-      where: {
-        active: true,
-      },
-    });
-  }
-
+  
 }
