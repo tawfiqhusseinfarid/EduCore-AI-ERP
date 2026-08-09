@@ -49,6 +49,29 @@ model User {
 
   role        UserRole  @default(STUDENT) @map("ROLE")
 
+  refreshTokens RefreshToken[]
+
   @@map("USERS")
+  @@schema("auth")
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement()) @map("ID")
+
+  tokenHash String   @map("TOKEN_HASH")
+
+  userId    Int      @map("USER_ID")
+
+  expiresAt DateTime @map("EXPIRES_AT")
+
+  revoked   Boolean  @default(false) @map("REVOKED")
+
+  createdAt DateTime @default(now()) @map("CREATED_AT")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+  @@map("REFRESH_TOKENS")
   @@schema("auth")
 }

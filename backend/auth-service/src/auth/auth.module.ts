@@ -5,10 +5,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from '../users/users.module';
+import { RefreshTokenRepository } from './repositories/refresh-token.repository';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
     UsersModule,
+    PassportModule,
 
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -28,8 +32,14 @@ import { UsersModule } from '../users/users.module';
 
   controllers: [AuthController],
 
-  providers: [AuthService],
+  providers: [
+  AuthService,
+  RefreshTokenRepository,
+  JwtStrategy,
+],
 
-  exports: [JwtModule],
+  exports: [JwtModule,
+    PassportModule,
+  ],
 })
 export class AuthModule {}
